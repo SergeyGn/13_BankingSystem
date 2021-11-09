@@ -1,0 +1,237 @@
+﻿<Window x:Class="_13_BankingSystem.AddOrEditClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_13_BankingSystem"
+        mc:Ignorable="d"
+        Title="Add client" 
+        Height="450" MinHeight="450" MaxHeight="450" 
+        Width="400" MinWidth="400" MaxWidth="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Фамилия" 
+                   Grid.Column="0" 
+                   Grid.Row="0" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TextBox x:Name="LastName" 
+                 Grid.Column="1" 
+                 Grid.Row="0"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 />
+        <TextBlock Text="Имя" 
+                   Grid.Column="0" 
+                   Grid.Row="1" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TextBox x:Name="FirstName" 
+                 Grid.Column="1" 
+                 Grid.Row="1"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"/>
+        <TextBlock Text="Отчество" 
+                   Grid.Column="0" 
+                   Grid.Row="2" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TextBox x:Name="Patronymic" 
+                 Grid.Column="1" 
+                 Grid.Row="2"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"/>
+        <TextBlock Text="Дата рождения" 
+                   Grid.Column="0" 
+                   Grid.Row="3" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <Grid    Grid.Column="1" 
+                 Grid.Row="3"
+                 ShowGridLines="True"
+                 >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch">
+                <Button x:Name="CountDayBirthPlus"
+                        Height="10"></Button>
+                <TextBlock x:Name="CountDayBirth" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"> 12</TextBlock>
+                <Button x:Name="CountDayBirthMinus"
+                        Height="10"></Button>
+            </StackPanel>
+            <ComboBox x:Name="MonthBirthday" Grid.Column="1" Margin="2"/>
+            <ComboBox x:Name="YearBirthday" Grid.Column="2" Margin="2"/>
+        </Grid>
+        <TextBlock Text="Дата Вклада" 
+                   Grid.Column="0" 
+                   Grid.Row="4" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <Grid    Grid.Column="1" 
+                 Grid.Row="4"
+                 ShowGridLines="True"
+                 >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch">
+                <Button x:Name="CountDayDepositPlus"
+                        Height="10"></Button>
+                <TextBlock x:Name="CountDayStartDeposit" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"> 12</TextBlock>
+                <Button x:Name="CountDayDepositMinus"
+                        Height="10"></Button>
+            </StackPanel>
+            <ComboBox x:Name="MonthStartDeposit" Grid.Column="1" Margin="2"/>
+            <ComboBox x:Name="YearStartDeposit" Grid.Column="2" Margin="2"/>
+        </Grid>
+        <TextBlock Text="Дата закрытия счета" 
+                   Grid.Column="0" 
+                   Grid.Row="5" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <Grid    Grid.Column="1" 
+                 Grid.Row="5"
+                 ShowGridLines="True"
+                 >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="73*"/>
+                <ColumnDefinition Width="73*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Stretch">
+                <Button x:Name="CountDayPlus"
+                        Height="10"></Button>
+                <TextBlock x:Name="CountDayEndDeposit" 
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"> 12</TextBlock>
+                <Button x:Name="CountDayMinus"
+                        Height="10"></Button>
+            </StackPanel>
+            <ComboBox x:Name="MonthEndDeposit" Grid.Column="1" Margin="2"/>
+            <ComboBox x:Name="YearEndDeposit" Grid.Column="2" Margin="2"/>
+        </Grid>
+        <TextBlock Text="Банковская ставка для"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="6"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="7">
+            <RadioButton GroupName="BankDeposit"
+                         Name="client"
+                         Content="Клиент"
+                         Margin="10,0" Checked="client_Checked"/>
+            <RadioButton GroupName="BankDeposit"
+                         Name="VIPclient"
+                         Content="VIP Клиент"
+                         Margin="10,0" Checked="VIPclient_Checked"/>
+            <RadioButton GroupName="BankDeposit"
+                         Name="LegalEntity"
+                         Content="Юридическое лицо"
+                         Margin="10,0" Checked="LegalEntity_Checked"/>
+        </StackPanel>
+        <TextBlock Text="Вид начислений"
+                   Grid.ColumnSpan="2"
+                   Grid.Row="7"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="8">
+            <RadioButton GroupName="TypeDeposit"
+                         Name="Capitalization"
+                         Content="С капитализацией"
+                         Margin="10,0" Checked="Capitalization_Checked"/>
+            <RadioButton GroupName="TypeDeposit"
+                         Name="NotCapitalization"
+                         Content="Без капитализации"
+                         Margin="10,0" Checked="NotCapitalization_Checked"/>
+
+        </StackPanel>
+        <TextBlock Text="Вклад" 
+                   Grid.Column="0" 
+                   Grid.Row="9" 
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+        <TextBox x:Name="Deposit" 
+                 Grid.Column="1" 
+                 Grid.Row="9"
+                 HorizontalAlignment="Stretch"
+                 VerticalAlignment="Stretch"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 Text="Например: 0000.00"
+                 Foreground="Gray"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Grid.ColumnSpan="2"
+                    Grid.Row="10"
+                    >
+            <Button x:Name="CalculateButton"
+                    Width="100"
+                    Content="Расчитать"
+                    Margin="2,0" Click="CalculateButton_Click"/>
+            <Button x:Name="SaveButton"
+                    Width="100"
+                    Content="Cохранить"
+                    Margin="2,0"/>
+            <Button x:Name="CancelButton"
+                    Width="100"
+                    Content="Отмена"
+                    Margin="2,0"/>
+        </StackPanel>
+        <StackPanel Grid.Row="11"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBlock Text="Сумма после закрытия вклада составляет"
+                       />
+            <TextBlock x:Name="Amount" 
+                       Margin="5,0"
+                       
+                       />
+        </StackPanel>
+    </Grid>
+</Window>
