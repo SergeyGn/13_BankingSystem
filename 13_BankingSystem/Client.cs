@@ -25,14 +25,14 @@ namespace _13_BankingSystem
 
         public Client(double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
         {
-
+            IsCapitalization = isCapitalization;
             StartDeposit = startDeposit;
             DateOfStartDeposit = dateOfStartDeposit;
             DateOfEndDeposit = dateOfEndDeposit;
             AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
             AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
             Percent = percent;
-            IsCapitalization = isCapitalization;
+            
         }
         /// <summary>
         /// Фмилия
@@ -85,39 +85,42 @@ namespace _13_BankingSystem
         private DateTime DateOfEndDeposit { get; set; }
 
         /// <summary>
-        /// Сумма после окончанияS срока вклада
+        /// Сумма после окончания срока вклада
         /// </summary>
-        private double AmountEnd { get; set; }
+        public double AmountEnd { get; set; }
 
-        private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit)
+        private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit) //этот метод не считает количество месяцев его нужно переделать
         {
             int countYear = dateEndDeposit.Year - dateStartDeposit.Year;
             int countMonth = dateEndDeposit.Month - dateStartDeposit.Month;
             int countDay = dateEndDeposit.Day - dateStartDeposit.Day;
-
+            if(countYear>0)
+            {
+                countMonth += countYear * 12;
+            }
             if (countDay < 0)
             {
                 countMonth -= 1;
             }
 
-            return countMonth + countYear * 12;
+            return countMonth;
         }
 
         private double GetAmonth(int countMonth, double deposit, double percent)
         {
-            if (IsCapitalization == true)
+            double monthPercent = percent / 12;
+            if (countMonth > 0)
             {
-                for (int i = 0; i <= countMonth; i++)
+                if (IsCapitalization == true)
                 {
-                    deposit += deposit * percent/100;
+                    for (int i = 0; i < countMonth; i++)
+                    {
+                        deposit += deposit * monthPercent / 100;
+                    }
                 }
-            }
-            else if (IsCapitalization == false)
-            {
-                double value = deposit;
-                for (int i = 0; i <= countMonth; i++)
+                else if (IsCapitalization == false)
                 {
-                    deposit += value * percent/100;
+                    deposit += deposit * monthPercent * countMonth/100;
                 }
             }
             return deposit;

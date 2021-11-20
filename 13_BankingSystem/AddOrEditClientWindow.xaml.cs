@@ -55,7 +55,7 @@ namespace _13_BankingSystem
             DateTime startDepositDate = GetDate(YearStartDeposit.Text, MonthStartDeposit.Text, CountDayStartDeposit.Text);
             DateTime endDepositDate = GetDate(YearEndDeposit.Text, MonthEndDeposit.Text, CountDayEndDeposit.Text);
             newClient = new Client(ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, percent, isCapitalization);
-            Amount.Text = newClient.AmountNow.ToString();
+            Amount.Text = newClient.AmountEnd.ToString();
 
         }
 
@@ -88,7 +88,7 @@ namespace _13_BankingSystem
 
         private void client_Checked(object sender, RoutedEventArgs e)
         {
-            GetBankRate(10);
+            GetBankRate(12);
         }
 
         private void VIPclient_Checked(object sender, RoutedEventArgs e)
