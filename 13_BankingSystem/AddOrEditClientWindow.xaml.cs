@@ -121,16 +121,6 @@ namespace _13_BankingSystem
             isCapitalization = _isCapitalization;
             return isCapitalization;
         }
-
-
-        private void Deposit_PreviewMouseUp(object sender, MouseButtonEventArgs e)
-        {
-            Deposit.Text = "";
-            Deposit.Foreground=Brushes.Black;
-        }
-
-
-
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             
@@ -168,6 +158,11 @@ namespace _13_BankingSystem
                 }
             }
             return text;
+        }
+        private void Deposit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Deposit.Text = "";
+            Deposit.Foreground = Brushes.Black;
         }
     }
 }

@@ -202,7 +202,7 @@
                  VerticalContentAlignment="Center"
                  HorizontalContentAlignment="Center"
                  Text="Например: 0000.00"
-                 Foreground="Gray" PreviewMouseUp="Deposit_PreviewMouseUp" />
+                 Foreground="Gray" PreviewMouseLeftButtonDown="Deposit_PreviewMouseLeftButtonDown" />
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     Grid.ColumnSpan="2"
