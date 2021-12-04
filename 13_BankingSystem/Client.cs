@@ -10,9 +10,16 @@ namespace _13_BankingSystem
     {
         public Client(string lastName, string firstName, string patronymic, DateTime dateBirth, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
         {
-            LastName = lastName;
-            FirstName = firstName;
-            Patronymic = patronymic;
+            if (lastName != "")
+            {
+                LastName = lastName;
+            }
+            if (firstName != "") FirstName = firstName;
+            if (patronymic != "") Patronymic = patronymic;
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
             DateBirth = dateBirth;
             StartDeposit = startDeposit;
             DateOfStartDeposit = dateOfStartDeposit;
@@ -89,7 +96,7 @@ namespace _13_BankingSystem
         /// </summary>
         public double AmountEnd { get; set; }
 
-        private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit) //этот метод не считает количество месяцев его нужно переделать
+        private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit)
         {
             int countYear = dateEndDeposit.Year - dateStartDeposit.Year;
             int countMonth = dateEndDeposit.Month - dateStartDeposit.Month;

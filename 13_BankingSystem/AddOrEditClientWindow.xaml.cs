@@ -121,5 +121,53 @@ namespace _13_BankingSystem
             isCapitalization = _isCapitalization;
             return isCapitalization;
         }
+
+
+        private void Deposit_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Deposit.Text = "";
+            Deposit.Foreground=Brushes.Black;
+        }
+
+
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            try
+            {
+                DateTime startDepositDate = GetDate(YearStartDeposit.Text, MonthStartDeposit.Text, CountDayStartDeposit.Text);
+                DateTime endDepositDate = GetDate(YearEndDeposit.Text, MonthEndDeposit.Text, CountDayEndDeposit.Text);
+                DateTime birthDay = GetDate(YearBirthday.Text, MonthBirthday.Text, CountDayBirth.Text);
+                newClient = new Client(LastName.Text, FirstName.Text, Patronymic.Text, birthDay, ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, percent, isCapitalization);
+                Amount.Text = "";
+                DialogString.Text = "Результат сохранён";
+                MainWindow.clients.Add(newClient);
+            }
+            catch(IndexOutOfRangeException)
+            {
+
+                Amount.Text = "";
+                DialogString.Text = "Некорректные данные";
+            }
+        }
+
+        private string CheckText(TextBox textBox) //доделать реализацию 
+        {
+            string badChar = "/?.>,<'}{[]-=+0987654321!@#$%^&*()_"+"";
+            string text = textBox.Text;
+            for (int i=0;i<text.Length;i++)
+            {
+                for(int j=0;j<badChar.Length;j++)
+                {
+                    if(i==j)
+                    {
+                        textBox.Foreground = Brushes.Red;
+                        break;
+                    }
+                }
+            }
+            return text;
+        }
     }
 }

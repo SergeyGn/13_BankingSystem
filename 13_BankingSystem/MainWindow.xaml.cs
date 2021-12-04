@@ -20,7 +20,7 @@ namespace _13_BankingSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<Client> clients = new List<Client>();
+        public static List<Client> clients = new List<Client>();
         static public Client CurrentClient;
         public static string[] arrayMonth = new string[12] { "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" };
 
@@ -32,8 +32,6 @@ namespace _13_BankingSystem
         private void AddClientButton_Click(object sender, RoutedEventArgs e)
         {
             AddOrEditClientWindow addClientWindow=CreateWindowClient();
-
-
         }
 
         private void EditClientButton_Click(object sender, RoutedEventArgs e)
