@@ -27,6 +27,7 @@ namespace _13_BankingSystem
         public MainWindow()
         {
             InitializeComponent();
+            ListName.ItemsSource = clients;
         }
 
         private void AddClientButton_Click(object sender, RoutedEventArgs e)
@@ -58,9 +59,17 @@ namespace _13_BankingSystem
             addClientWindow.YearEndDeposit.SelectedItem = yearNow;
             addClientWindow.Owner = this;
             addClientWindow.Show();
+            Refresh(addClientWindow);    
             return addClientWindow;
         }
+        private void Refresh(Window window)
+        {
+            window.Closed += (s, eventarg) =>
+            {
+                ListName.Items.Refresh();
+            }; //метод который рефрешет родителя после закрытия чилда
 
+        }
         private void ListName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             

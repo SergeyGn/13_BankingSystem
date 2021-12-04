@@ -26,7 +26,33 @@
                 </Grid.RowDefinitions>
                 <ListView x:Name="ListName"                      
                           Margin="4,1"
-                          Grid.Row="0" SelectionChanged="ListName_SelectionChanged"/>
+                          Grid.Row="0" SelectionChanged="ListName_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding LastName}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader  Tag="LastName" >
+                                    Фамилия
+                                </GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                        <GridViewColumn  DisplayMemberBinding="{Binding FirstName}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader  Tag="FirstName">
+                                    Имя
+                                </GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                            <GridViewColumn  DisplayMemberBinding="{Binding StartDeposit}">
+                            <GridViewColumn.Header>
+                                <GridViewColumnHeader >
+                                    Стартовый депозит
+                                </GridViewColumnHeader>
+                            </GridViewColumn.Header>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+                </ListView>
                 <TextBox  x:Name="SearchString"
                           Grid.Row="1"
                           Margin="4,1"
