@@ -72,7 +72,17 @@ namespace _13_BankingSystem
         }
         private void ListName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            CurrentClient = ListName.SelectedItem as Client;
+            Name.Text = $"{CurrentClient.LastName} {CurrentClient.FirstName} {CurrentClient.Patronymic}";
+            DateOfBirth.Text = CurrentClient.DateBirth.ToShortDateString();
+            StartDeposit.Text = CurrentClient.StartDeposit.ToString();
+            DateOfStartDeposit.Text = CurrentClient.DateOfStartDeposit.ToShortDateString();
+            CountMonth.Text = CurrentClient.CountMonth.ToString();
+            BankRate.Text = $"{CurrentClient.Percent.ToString()}% годовых";
+            AmountNow.Text = CurrentClient.AmountNow.ToString();
+
+            if (CurrentClient.IsCapitalization == false) AccrualOfInterest.Text = "без капитализации";
+            else AccrualOfInterest.Text = "с капитализацией";
         }
     }
 }

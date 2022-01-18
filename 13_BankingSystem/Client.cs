@@ -39,7 +39,7 @@ namespace _13_BankingSystem
             AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
             AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
             Percent = percent;
-            
+            CountMonth = GetCountMonth(dateOfStartDeposit, dateOfEndDeposit);
         }
         /// <summary>
         /// Фмилия
@@ -96,6 +96,10 @@ namespace _13_BankingSystem
         /// </summary>
         public double AmountEnd { get; set; }
 
+        /// <summary>
+        /// Кол-во месяцев на сколько открыт счёт
+        /// </summary>
+        public int CountMonth { get; set; }
         private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit)
         {
             int countYear = dateEndDeposit.Year - dateStartDeposit.Year;
