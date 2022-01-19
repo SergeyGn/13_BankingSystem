@@ -84,5 +84,10 @@ namespace _13_BankingSystem
             if (CurrentClient.IsCapitalization == false) AccrualOfInterest.Text = "без капитализации";
             else AccrualOfInterest.Text = "с капитализацией";
         }
+
+        private void TransferButton_Click(object sender, RoutedEventArgs e)
+        {
+            //тут будет открываться окно с реализацией переводов
+        }
     }
 }

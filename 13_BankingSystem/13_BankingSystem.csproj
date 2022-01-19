@@ -58,6 +58,9 @@
     <Compile Include="AddOrEditClientWindow.xaml.cs">
       <DependentUpon>AddOrEditClientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransferWindow.xaml.cs">
+      <DependentUpon>TransferWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -72,6 +75,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="AddOrEditClientWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TransferWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\DeleteImage1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\TransferImages.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

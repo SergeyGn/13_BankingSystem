@@ -180,6 +180,9 @@
             <Button x:Name="EditClientButton" Width="35" Margin="2" Click="EditClientButton_Click">
                 <Image Source="/Images/EditImages.png" />
             </Button>
+            <Button x:Name="TransferButton" Width="35" Margin="2" Click="TransferButton_Click">
+                <Image Source="/Images/TransferImages.png" />
+            </Button>
             <Button x:Name="DeleteClient" Width="35" Margin="2">
                 <Image Source="/Images/DeleteImage1.png"/>
             </Button>
