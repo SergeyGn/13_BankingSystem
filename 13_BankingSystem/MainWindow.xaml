@@ -43,10 +43,10 @@
                                 </GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
-                            <GridViewColumn  DisplayMemberBinding="{Binding StartDeposit}">
+                            <GridViewColumn  DisplayMemberBinding="{Binding AmountNow}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader >
-                                    Стартовый депозит
+                                    Сумма
                                 </GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>

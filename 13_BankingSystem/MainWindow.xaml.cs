@@ -87,7 +87,16 @@ namespace _13_BankingSystem
 
         private void TransferButton_Click(object sender, RoutedEventArgs e)
         {
+            TransferWindow TW = TransferWindow();
             //тут будет открываться окно с реализацией переводов
+        }
+        private TransferWindow TransferWindow()
+        {
+            TransferWindow TW = new TransferWindow();
+            TW.Owner = this;
+            TW.Show();
+            Refresh(TW);
+            return TW;
         }
     }
 }
