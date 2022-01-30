@@ -28,36 +28,38 @@
                           Margin="4,1"
                           Grid.Row="0" SelectionChanged="ListName_SelectionChanged">
                 <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding LastName}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader  Tag="LastName" >
-                                    Фамилия
-                                </GridViewColumnHeader>
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding FirstName}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader  Tag="FirstName">
-                                    Имя
-                                </GridViewColumnHeader>
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                            <GridViewColumn  DisplayMemberBinding="{Binding AmountNow}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader >
-                                    Сумма
-                                </GridViewColumnHeader>
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
+                        <GridView>
+                            <GridViewColumn Header="Клиент"  
+                                            DisplayMemberBinding="{Binding NameClient}"
+                                            Width="150">
+                            </GridViewColumn >
+                            <GridViewColumn Header="Баланс"
+                                            DisplayMemberBinding="{Binding AmountNow}"
+                                            Width="100">
+                            </GridViewColumn>
                     </GridView>
                 </ListView.View>
                 </ListView>
-                <TextBox  x:Name="SearchString"
+                <Grid Grid.Row="1"
+                      Margin="4,1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
+                  <TextBox  x:Name="SearchString"
                           Grid.Row="1"
-                          Margin="4,1"
                           Text="Поиск..."
-                          Foreground="Gray"/>
+                          Foreground="Gray" 
+                          PreviewMouseDown="SearchString_PreviewMouseDown" 
+                          />
+                    <Button x:Name="SearchButton" 
+                            Click="SearchButton_Click"
+                            Grid.Column="1"
+                            Background="White">
+                        <Image Source="Images/SearchImages.png"/>
+                    </Button>
+                    
+                </Grid>
             </Grid>
             <Grid Margin="5" 
                   Grid.Column="1">
@@ -127,13 +129,9 @@
                            FontWeight="Bold"
                            Text="с капитализацией"
                            />
-
-
-
-
                 <TextBlock Grid.Row="1" 
                            FontWeight="Bold"
-                           Text="ФИО:"
+                           Text="Клиент:"
                            HorizontalAlignment="Right"
                            />
                 <TextBlock Grid.Row="2" 

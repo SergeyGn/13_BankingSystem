@@ -58,6 +58,8 @@
     <Compile Include="AddOrEditClientWindow.xaml.cs">
       <DependentUpon>AddOrEditClientWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LegalBody.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="TransferWindow.xaml.cs">
       <DependentUpon>TransferWindow.xaml</DependentUpon>
     </Compile>
@@ -121,6 +123,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\TransferImages.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\SearchImages.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

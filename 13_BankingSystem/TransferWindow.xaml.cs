@@ -24,8 +24,8 @@ namespace _13_BankingSystem
         public TransferWindow()
         {
             InitializeComponent();
-            ListNameSender.ItemsSource = MainWindow.clients;
-            ListNameRecipient.ItemsSource = MainWindow.clients;
+            ListNameSender.ItemsSource = MainWindow.Clients;
+            ListNameRecipient.ItemsSource = MainWindow.Clients;
         }
 
         private void ListNameSender_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -49,10 +49,10 @@ namespace _13_BankingSystem
         {
             if (int.TryParse(TransferMoney.Text, out int result))
             {
-                if (MainWindow.clients[numberSender].AmountNow >= result)
+                if (MainWindow.Clients[numberSender].AmountNow >= result)
                 {
-                    MainWindow.clients[numberSender].AmountNow -= result;
-                    MainWindow.clients[numberRecipient].AmountNow += result;
+                    MainWindow.Clients[numberSender].AmountNow -= result;
+                    MainWindow.Clients[numberRecipient].AmountNow += result;
                     InfoText.Text = "Успешно выполнено";
                     ListNameSender.Items.Refresh();
                     ListNameRecipient.Items.Refresh();

@@ -24,21 +24,15 @@
             </Grid.RowDefinitions>
             <ListView x:Name="ListNameSender"
                       Grid.Column="0"
-                          Margin="4,1"
-                          Grid.Row="0" SelectionChanged="ListNameSender_SelectionChanged">
+                      Margin="4,1"
+                      Grid.Row="0" 
+                      SelectionChanged="ListNameSender_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding LastName}">
+                        <GridViewColumn DisplayMemberBinding="{Binding NameClient}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader  Tag="LastName" >
-                                    Фамилия
-                                </GridViewColumnHeader>
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding FirstName}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader  Tag="FirstName">
-                                    Имя
+                                    Клиент
                                 </GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
@@ -52,12 +46,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBox  x:Name="SearchStringSender"
-                          Grid.Row="1"
-                          Margin="4,1"
-                          Text="Поиск..."
-                          Foreground="Gray"/>
-
         </Grid>
         <Grid Grid.Column="2"
               Grid.Row="0">
@@ -71,17 +59,10 @@
                           Grid.Row="0" SelectionChanged="ListNameRecipient_SelectionChanged">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding LastName}">
+                        <GridViewColumn DisplayMemberBinding="{Binding NameClient}">
                             <GridViewColumn.Header>
                                 <GridViewColumnHeader  Tag="LastName" >
-                                    Фамилия
-                                </GridViewColumnHeader>
-                            </GridViewColumn.Header>
-                        </GridViewColumn>
-                        <GridViewColumn  DisplayMemberBinding="{Binding FirstName}">
-                            <GridViewColumn.Header>
-                                <GridViewColumnHeader  Tag="FirstName">
-                                    Имя
+                                    Клиент
                                 </GridViewColumnHeader>
                             </GridViewColumn.Header>
                         </GridViewColumn>
@@ -95,11 +76,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            <TextBox  x:Name="SearchStringRecipient"
-                          Grid.Row="1"
-                          Margin="4,1"
-                          Text="Поиск..."
-                          Foreground="Gray"/>
 
         </Grid>
         <StackPanel Grid.Column="1"

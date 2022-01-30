@@ -20,14 +20,15 @@ namespace _13_BankingSystem
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<Client> clients = new List<Client>();
+        public static List<Client> Clients = new List<Client>();
         static public Client CurrentClient;
+        private int _numberCurrentClient;
         public static string[] arrayMonth = new string[12] { "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" };
 
         public MainWindow()
         {
             InitializeComponent();
-            ListName.ItemsSource = clients;
+            ListName.ItemsSource = Clients;
         }
 
         private void AddClientButton_Click(object sender, RoutedEventArgs e)
@@ -72,10 +73,23 @@ namespace _13_BankingSystem
         }
         private void ListName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CurrentClient = ListName.SelectedItem as Client;
-            Name.Text = $"{CurrentClient.LastName} {CurrentClient.FirstName} {CurrentClient.Patronymic}";
-            DateOfBirth.Text = CurrentClient.DateBirth.ToShortDateString();
-            StartDeposit.Text = CurrentClient.StartDeposit.ToString();
+            if(ListName.SelectedItem is Person)
+            {
+                Person person = ListName.SelectedItem as Person;
+                DateOfBirth.Text = person.DateBirth.ToShortDateString();
+                Name.Text = $"{person.NameClient}";
+                CurrentClient = person;
+            }
+            
+            else
+            {
+                LegalBody legalBody = ListName.SelectedItem as LegalBody;
+                DateOfBirth.Text = "-";
+                Name.Text = $"{legalBody.NameClient}";
+                CurrentClient = legalBody;
+            }
+            
+            StartDeposit.Text = CurrentClient.AmountNow.ToString();
             DateOfStartDeposit.Text = CurrentClient.DateOfStartDeposit.ToShortDateString();
             CountMonth.Text = CurrentClient.CountMonth.ToString();
             BankRate.Text = $"{CurrentClient.Percent.ToString()}% годовых";
@@ -97,6 +111,68 @@ namespace _13_BankingSystem
             TW.Show();
             Refresh(TW);
             return TW;
+        }
+
+        private void SearchString_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            SearchString.Text = "";
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e) //доделать эту хрень
+        {
+            string searchText = SearchString.Text;
+            bool isFindClient = false;
+            if (double.TryParse(searchText, out double deposit))
+            {
+                for (int i = 0; i < Clients.Count; i++)
+                {
+                    if (Clients[i]==CurrentClient)
+                    {
+                        isFindClient = true;
+                    }
+                    if (Clients[i] != CurrentClient && isFindClient)
+                    {
+                        if (Clients[i].StartDeposit == deposit)
+                        {
+                            ListName.SelectedItem = ListName.Items[i];
+                            CurrentClient = ListName.Items[i] as Client;
+                            return;
+                        }
+                    }
+                }
+            }
+            //else
+            //{
+
+            //    for (int i = 0; i < Clients.Count; i++)
+            //    {
+            //        if (Clients[i] == CurrentClient)
+            //        {
+            //            isFindClient = true;
+            //        }
+            //        if (Clients[i] != CurrentClient && isFindClient)
+            //        {
+            //            if (Clients[i].FirstName == searchText)
+            //            {
+            //                ListName.SelectedItem = ListName.Items[i];
+            //                CurrentClient = ListName.Items[i] as Client;
+            //                return;
+            //            }
+            //            else if (Clients[i].LastName == searchText)
+            //            {
+            //                ListName.SelectedItem = ListName.Items[i];
+            //                CurrentClient = ListName.Items[i] as Client;
+            //                return;
+            //            }
+            //            else if (Clients[i].Patronymic == searchText)
+            //            {
+            //                ListName.SelectedItem = ListName.Items[i];
+            //                CurrentClient = ListName.Items[i] as Client;
+            //                return;
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 }

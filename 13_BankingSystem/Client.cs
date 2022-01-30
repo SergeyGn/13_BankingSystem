@@ -6,60 +6,57 @@ using System.Threading.Tasks;
 
 namespace _13_BankingSystem
 {
-    public class Client
+    public abstract class Client
     {
-        public Client(string lastName, string firstName, string patronymic, DateTime dateBirth, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
+        //public Client(DateTime dateBirth, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
+        //{
+        //    if (lastName != "")
+        //    {
+        //        LastName = lastName;
+        //    }
+        //    if (firstName != "") FirstName = firstName;
+        //    if (patronymic != "") Patronymic = patronymic;
+        //    else
+        //    {
+        //        throw new IndexOutOfRangeException();
+        //    }
+        //    DateBirth = dateBirth;
+        //    StartDeposit = startDeposit;
+        //    DateOfStartDeposit = dateOfStartDeposit;
+        //    DateOfEndDeposit = dateOfEndDeposit;
+        //    AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
+        //    AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
+        //    Percent = percent;
+        //    IsCapitalization = isCapitalization;
+        //}
+
+        public Client(string nameClient, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization, bool isVIP)
         {
-            if (lastName != "")
+            NameClient = nameClient;
+            IsCapitalization = isCapitalization;
+            StartDeposit = startDeposit;
+            DateOfStartDeposit = dateOfStartDeposit;
+            DateOfEndDeposit = dateOfEndDeposit;
+            AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
+            AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
+            CountMonth = GetCountMonth(dateOfStartDeposit, dateOfEndDeposit);
+            IsVIP = isVIP;
+            if (isVIP == true)
             {
-                LastName = lastName;
+                Percent = GetHigherPercent(percent,1.2);
             }
-            if (firstName != "") FirstName = firstName;
-            if (patronymic != "") Patronymic = patronymic;
             else
             {
-                throw new IndexOutOfRangeException();
+                Percent = percent;
             }
-            DateBirth = dateBirth;
-            StartDeposit = startDeposit;
-            DateOfStartDeposit = dateOfStartDeposit;
-            DateOfEndDeposit = dateOfEndDeposit;
-            AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
-            AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
-            Percent = percent;
-            IsCapitalization = isCapitalization;
+            
+            
         }
-
-        public Client(double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
-        {
-            IsCapitalization = isCapitalization;
-            StartDeposit = startDeposit;
-            DateOfStartDeposit = dateOfStartDeposit;
-            DateOfEndDeposit = dateOfEndDeposit;
-            AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
-            AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
-            Percent = percent;
-            CountMonth = GetCountMonth(dateOfStartDeposit, dateOfEndDeposit);
-        }
+       
         /// <summary>
-        /// Фмилия
+        /// Имя/Название клиента
         /// </summary>
-        public string LastName { get; set; }
-
-        /// <summary>
-        /// Имя
-        /// </summary>
-        public string FirstName { get; set; }
-
-        /// <summary>
-        /// Отчество
-        /// </summary>
-        public string Patronymic { get; set; }
-
-        /// <summary>
-        /// Дата рождения
-        /// </summary>
-        public DateTime DateBirth { get; set; }
+        public string NameClient { get; set; }
 
         /// <summary>
         /// Начальный вклад
@@ -100,6 +97,12 @@ namespace _13_BankingSystem
         /// Кол-во месяцев на сколько открыт счёт
         /// </summary>
         public int CountMonth { get; set; }
+
+        /// <summary>
+        /// Id клиента
+        /// </summary>
+        public bool IsVIP { get; set; }
+
         private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit)
         {
             int countYear = dateEndDeposit.Year - dateStartDeposit.Year;
@@ -135,6 +138,12 @@ namespace _13_BankingSystem
                 }
             }
             return deposit;
+        }
+
+        private double GetHigherPercent(double percent, double coefficient)
+        {
+            percent *= coefficient;
+            return percent;
         }
     }
 }
