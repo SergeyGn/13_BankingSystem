@@ -86,7 +86,7 @@ namespace _13_BankingSystem
         /// <summary>
         /// Дата завершения срока
         /// </summary>
-        private DateTime DateOfEndDeposit { get; set; }
+        public DateTime DateOfEndDeposit { get; set; }
 
         /// <summary>
         /// Сумма после окончания срока вклада

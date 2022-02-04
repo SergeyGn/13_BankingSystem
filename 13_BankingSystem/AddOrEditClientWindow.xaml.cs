@@ -189,7 +189,12 @@ namespace _13_BankingSystem
                 }
                 Amount.Text = "";
                 DialogString.Text = "Результат сохранён";
+                if(MainWindow.IsEdit==false)
                 MainWindow.Clients.Add(newClient);
+                else if(MainWindow.IsEdit==true)
+                {
+                    MainWindow.Clients[MainWindow.NumberCurrentClient] = newClient;
+                }
             }
             catch(IndexOutOfRangeException)
             {
@@ -205,23 +210,23 @@ namespace _13_BankingSystem
             else
                 return false;
         }
-        private string CheckText(TextBox textBox) //доделать реализацию 
-        {
-            string badChar = "/?.>,<'}{[]-=+0987654321!@#$%^&*()_"+"";
-            string text = textBox.Text;
-            for (int i=0;i<text.Length;i++)
-            {
-                for(int j=0;j<badChar.Length;j++)
-                {
-                    if(i==j)
-                    {
-                        textBox.Foreground = Brushes.Red;
-                        break;
-                    }
-                }
-            }
-            return text;
-        }
+        //private string CheckText(TextBox textBox) //доделать реализацию 
+        //{
+        //    string badChar = "/?.>,<'}{[]-=+0987654321!@#$%^&*()_"+"";
+        //    string text = textBox.Text;
+        //    for (int i=0;i<text.Length;i++)
+        //    {
+        //        for(int j=0;j<badChar.Length;j++)
+        //        {
+        //            if(i==j)
+        //            {
+        //                textBox.Foreground = Brushes.Red;
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return text;
+        //}
         private void Deposit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Deposit.Text = "";

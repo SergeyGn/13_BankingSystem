@@ -181,7 +181,7 @@
             <Button x:Name="TransferButton" Width="35" Margin="2" Click="TransferButton_Click">
                 <Image Source="/Images/TransferImages.png" />
             </Button>
-            <Button x:Name="DeleteClient" Width="35" Margin="2">
+            <Button x:Name="DeleteClient" Width="35" Margin="2" Click="DeleteClient_Click">
                 <Image Source="/Images/DeleteImage1.png"/>
             </Button>
         </StackPanel>

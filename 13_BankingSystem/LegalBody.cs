@@ -27,7 +27,7 @@ namespace _13_BankingSystem
         public LegalBody (string nameCompany, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization, bool isVIP) 
             :base(nameCompany,startDeposit,dateOfStartDeposit,dateOfEndDeposit,percent,isCapitalization, isVIP)
         {
-            nameCompany = NameCompany;
+           NameCompany= nameCompany;
         }
         /// <summary>
         /// Название компании
