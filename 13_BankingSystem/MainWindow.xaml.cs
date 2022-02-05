@@ -15,14 +15,13 @@ using System.Windows.Shapes;
 
 namespace _13_BankingSystem
 {
-    /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public static List<Client> Clients = new List<Client>();
         private string _warningMessage = "Выберите пользователя";
         private string _warningDeleteMessage = "Удалён пользователь ";
+        private string _warningFindEnd = "Поиск окончен";
+        private string _warningNotClient = "Нет пользователей!";
         static public Client CurrentClient;
         static public bool IsEdit;
         static public int NumberCurrentClient;
@@ -38,7 +37,6 @@ namespace _13_BankingSystem
                 ListName.SelectedItem = ListName.Items[0];
             }
         }
-
         private void AddClientButton_Click(object sender, RoutedEventArgs e)
         {
             IsEdit = false;
@@ -115,12 +113,13 @@ namespace _13_BankingSystem
             Refresh(addClientWindow);    
             return addClientWindow;
         }
+
         private void Refresh(Window window)
         {
             window.Closed += (s, eventarg) =>
             {
                 ListName.Items.Refresh();
-                if(Clients.Count!=0)
+                if (Clients.Count != 0)
                 {
                     CurrentClient = Clients[0];
                     ListName.SelectedItem = ListName.Items[0];
@@ -128,6 +127,7 @@ namespace _13_BankingSystem
             }; //метод который рефрешет родителя после закрытия чилда
 
         }
+
         private void ListName_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if(ListName.SelectedItem is Person)
@@ -158,16 +158,19 @@ namespace _13_BankingSystem
 
         private void TransferButton_Click(object sender, RoutedEventArgs e)
         {
-            TransferWindow TW = TransferWindow();
-            //тут будет открываться окно с реализацией переводов
+            if (CheckClients())
+            {
+                TransferWindow TW = TransferWindow();
+            }
         }
+
         private TransferWindow TransferWindow()
         {
-            TransferWindow TW = new TransferWindow();
-            TW.Owner = this;
-            TW.Show();
-            Refresh(TW);
-            return TW;
+                TransferWindow TW = new TransferWindow();
+                TW.Owner = this;
+                TW.Show();
+                Refresh(TW);
+                return TW;
         }
 
         private void SearchString_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -177,29 +180,32 @@ namespace _13_BankingSystem
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-            string searchText = SearchString.Text;
-            bool isFindClient = false;
+            if (CheckClients())
+            {
+                string searchText = SearchString.Text;
+                bool isFindClient = false;
                 if (double.TryParse(searchText, out double deposit))
+                {
+                    for (int i = 0; i < Clients.Count; i++)
                     {
-                        for (int i = 0; i < Clients.Count; i++)
+                        if (Clients[i] == CurrentClient)
                         {
-                            if (Clients[i] == CurrentClient)
+                            isFindClient = true;
+                        }
+                        if (Clients[i] != CurrentClient && isFindClient)
+                        {
+                            if (Clients[i].StartDeposit == deposit)
                             {
-                                isFindClient = true;
-                            }
-                            if (Clients[i] != CurrentClient && isFindClient)
-                            {
-                                if (Clients[i].StartDeposit == deposit)
-                                {
-                                    ListName.SelectedItem = ListName.Items[i];
-                                    CurrentClient = ListName.Items[i] as Client;
-                                    return;
-                                }
+                                ListName.SelectedItem = ListName.Items[i];
+                                CurrentClient = ListName.Items[i] as Client;
+                                return;
                             }
                         }
                     }
+                }
                 else
                 {
+                    var client = CurrentClient;
                     for (int i = 0; i < Clients.Count; i++)
                     {
 
@@ -207,34 +213,55 @@ namespace _13_BankingSystem
                         {
                             isFindClient = true;
                         }
-                    if (CurrentClient == Clients[Clients.Count-1])
-                    {
-                        CurrentClient = Clients[0];
-                    }
-                    if (Clients[i] != CurrentClient && isFindClient)
+
+                        if (Clients[i] != CurrentClient && isFindClient)
                         {
                             if (Clients[i].NameClient.Contains(searchText))
                             {
                                 ListName.SelectedItem = ListName.Items[i];
                                 CurrentClient = ListName.Items[i] as Client;
-                             if (CurrentClient == Clients[Clients.Count - 1])
-                             {
-                                CurrentClient = Clients[0];
-                             }
-                            return;
+                                return;
                             }
+                        }
+
+                    }
+                    if (client == CurrentClient)
+                    {
+                        if (Clients.Count > 0)
+                        {
+                            CurrentClient = Clients[0];
+                            MessageBox.Show(_warningFindEnd, "", MessageBoxButton.OK);
                         }
                     }
                 }
-                
-            
+
+            }
         }
 
         private void DeleteClient_Click(object sender, RoutedEventArgs e)
         {
-            Clients.Remove(ListName.SelectedItem as Client);
-            MessageBox.Show(_warningDeleteMessage + CurrentClient.NameClient,"Delete",MessageBoxButton.OK);
-            ListName.Items.Refresh();
+            if (CheckClients())
+            {
+                Clients.Remove(ListName.SelectedItem as Client);
+                MessageBox.Show(_warningDeleteMessage + CurrentClient.NameClient, "Delete", MessageBoxButton.OK);
+                ListName.Items.Refresh();
+            }
+        }
+
+        private bool CheckClients()
+        {
+            bool isClients;
+            if (Clients.Count > 0)
+            {
+                isClients = true;
+                return isClients;
+            }
+            else
+            {
+                MessageBox.Show(_warningNotClient, "", MessageBoxButton.OK);
+                isClients = false;
+                return isClients;
+            }
         }
     }
 }

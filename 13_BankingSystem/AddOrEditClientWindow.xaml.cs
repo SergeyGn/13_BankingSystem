@@ -235,17 +235,17 @@ namespace _13_BankingSystem
 
         private void CountDayBirthPlus_Click(object sender, RoutedEventArgs e)
         {
-            CountDayBirth.Text = GetCountPlus(MonthBirthday,YearBirthday);
+            CountDayBirth.Text = GetCountPlus(CountDayBirth,MonthBirthday,YearBirthday);
         }
 
         private void CountDayBirthMinus_Click(object sender, RoutedEventArgs e)
         {
             CountDayBirth.Text =GetCountMinus(CountDayBirth);
-
         }
+
         private void CountDayDepositPlus_Click(object sender, RoutedEventArgs e)
         {
-            CountDayStartDeposit.Text = GetCountPlus(MonthStartDeposit, YearStartDeposit);
+            CountDayStartDeposit.Text = GetCountPlus(CountDayStartDeposit,MonthStartDeposit, YearStartDeposit);
         }
 
         private void CountDayDepositMinus_Click(object sender, RoutedEventArgs e)
@@ -255,16 +255,16 @@ namespace _13_BankingSystem
 
         private void CountDayPlus_Click(object sender, RoutedEventArgs e)
         {
-            CountDayEndDeposit.Text = GetCountPlus(MonthEndDeposit, YearEndDeposit);
+            CountDayEndDeposit.Text = GetCountPlus(CountDayEndDeposit,MonthEndDeposit, YearEndDeposit);
         }
 
         private void CountDayMinus_Click(object sender, RoutedEventArgs e)
         {
             CountDayEndDeposit.Text = GetCountMinus(CountDayEndDeposit);
         }
-        private string GetCountPlus(ComboBox month, ComboBox year)
+        private string GetCountPlus(TextBlock day, ComboBox month, ComboBox year)
         {
-            int countDay = int.Parse(CountDayBirth.Text);
+            int countDay = int.Parse(day.Text);
 
             if (countDay < DateTime.DaysInMonth(int.Parse(year.Text), (month.SelectedIndex + 1)))
                 countDay++;

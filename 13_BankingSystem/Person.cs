@@ -27,10 +27,19 @@ namespace _13_BankingSystem
             isVIP)
     : base($"{lastName} {firstName} {patronymic}" ,startDeposit, dateOfStartDeposit, dateOfEndDeposit, percent, isCapitalization, isVIP)
         {
-            LastName = lastName;
-            FirstName=firstName;
-            Patronymic=patronymic;
-            DateBirth=birthday;
+            if (lastName != "")
+            {
+                LastName = lastName;
+            }
+            if (firstName != "") FirstName = firstName;
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+            //у некоторых нет отчества поэтому проверка на отчество не делается
+
+
+            DateBirth = birthday;
 
         }
 

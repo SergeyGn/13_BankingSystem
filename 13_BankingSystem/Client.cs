@@ -10,16 +10,7 @@ namespace _13_BankingSystem
     {
         //public Client(DateTime dateBirth, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization)
         //{
-        //    if (lastName != "")
-        //    {
-        //        LastName = lastName;
-        //    }
-        //    if (firstName != "") FirstName = firstName;
-        //    if (patronymic != "") Patronymic = patronymic;
-        //    else
-        //    {
-        //        throw new IndexOutOfRangeException();
-        //    }
+
         //    DateBirth = dateBirth;
         //    StartDeposit = startDeposit;
         //    DateOfStartDeposit = dateOfStartDeposit;
@@ -33,8 +24,16 @@ namespace _13_BankingSystem
         public Client(string nameClient, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization, bool isVIP)
         {
             NameClient = nameClient;
+            if (startDeposit > 0)
+            {
+                StartDeposit = startDeposit;
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
             IsCapitalization = isCapitalization;
-            StartDeposit = startDeposit;
+
             DateOfStartDeposit = dateOfStartDeposit;
             DateOfEndDeposit = dateOfEndDeposit;
             AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
