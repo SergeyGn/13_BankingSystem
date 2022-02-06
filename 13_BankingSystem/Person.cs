@@ -32,11 +32,12 @@ namespace _13_BankingSystem
                 LastName = lastName;
             }
             if (firstName != "") FirstName = firstName;
+            if (patronymic != "") Patronymic = patronymic;
             else
             {
                 throw new IndexOutOfRangeException();
             }
-            //у некоторых нет отчества поэтому проверка на отчество не делается
+            
 
 
             DateBirth = birthday;

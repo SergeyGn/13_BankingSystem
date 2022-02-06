@@ -89,7 +89,8 @@
                  Height="40" Click="TransferButton_Click">
                 <Image Source="/Images/TransferImages.png"/>
             </Button>
-            <TextBlock x:Name="InfoText"/>
+            <TextBlock x:Name="InfoText"
+                       TextWrapping="Wrap"/>
         </StackPanel>
         <Button x:Name="OKButton"
                 Grid.Row="1"

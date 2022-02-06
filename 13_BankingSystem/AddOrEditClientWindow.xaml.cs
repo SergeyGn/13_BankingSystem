@@ -189,11 +189,16 @@ namespace _13_BankingSystem
                 }
                 Amount.Text = "";
                 DialogString.Text = "Результат сохранён";
-                if(MainWindow.IsEdit==false)
-                MainWindow.Clients.Add(newClient);
-                else if(MainWindow.IsEdit==true)
+
+                if (MainWindow.IsEdit == false)
+                {
+                    MainWindow.Clients.Add(newClient);
+                    Close();
+                }
+                else if (MainWindow.IsEdit == true)
                 {
                     MainWindow.Clients[MainWindow.NumberCurrentClient] = newClient;
+                    Close();
                 }
             }
             catch(IndexOutOfRangeException)

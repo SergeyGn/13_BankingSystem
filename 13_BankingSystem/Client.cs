@@ -24,7 +24,7 @@ namespace _13_BankingSystem
         public Client(string nameClient, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization, bool isVIP)
         {
             NameClient = nameClient;
-            if (startDeposit > 0)
+            if (startDeposit >= 0)
             {
                 StartDeposit = startDeposit;
             }

@@ -42,7 +42,7 @@ namespace _13_BankingSystem
 
         private void OKButton_Click(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
 
         private void TransferButton_Click(object sender, RoutedEventArgs e)
