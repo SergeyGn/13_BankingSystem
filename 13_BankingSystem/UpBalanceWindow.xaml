@@ -1,0 +1,39 @@
+﻿<Window x:Class="_13_BankingSystem.UpBalanceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_13_BankingSystem"
+        mc:Ignorable="d"
+        Title="UpBalanceWindow" 
+        Height="150" MinHeight="150" MaxHeight="150" 
+        Width="300" MinWidth="300" MaxWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="ButtonOK"
+                Content="OK" 
+                Height="20" 
+                Width="40" 
+                Grid.Row="1" Click="ButtonOK_Click"/>
+        <StackPanel Orientation="Vertical"
+                    VerticalAlignment="Center"
+                    Grid.Row="0">
+            <TextBlock x:Name="ClientName"
+                HorizontalAlignment="Center"/>
+            <TextBlock x:Name="AmountNow"
+                HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <TextBlock Text="пополнение на сумму:"/>
+                <TextBox x:Name="UpMoney"
+                     Width="100"
+                     HorizontalAlignment="Center"/>
+            </StackPanel>
+            <TextBlock x:Name="InfoText"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Grid>
+</Window>

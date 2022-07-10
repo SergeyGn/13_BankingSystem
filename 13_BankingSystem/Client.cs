@@ -19,7 +19,7 @@ namespace _13_BankingSystem
         //    AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
         //    Percent = percent;
         //    IsCapitalization = isCapitalization;
-        //}
+        //} 
 
         public Client(string nameClient, double startDeposit, DateTime dateOfStartDeposit, DateTime dateOfEndDeposit, double percent, bool isCapitalization, bool isVIP)
         {
@@ -101,6 +101,7 @@ namespace _13_BankingSystem
         /// Id клиента
         /// </summary>
         public bool IsVIP { get; set; }
+
 
         private int GetCountMonth(DateTime dateStartDeposit, DateTime dateEndDeposit)
         {

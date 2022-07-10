@@ -27,9 +27,14 @@ namespace _13_BankingSystem
         static public int NumberCurrentClient;
         public static string[] arrayMonth = new string[12] { "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" };
 
+
+        public static Messages MsgsHistory = new Messages();
+   
+        static public string name = Environment.UserName;
         public MainWindow()
         {
             InitializeComponent();
+            MsgsHistory.MessageText = new List<string>();
             ListName.ItemsSource = Clients;
             if (Clients.Count != 0)
             {
@@ -110,7 +115,8 @@ namespace _13_BankingSystem
             addClientWindow.YearEndDeposit.SelectedItem = yearNow;
             addClientWindow.Owner = this;
             addClientWindow.Show();
-            Refresh(addClientWindow);    
+            Refresh(addClientWindow);
+            
             return addClientWindow;
         }
 
@@ -123,6 +129,7 @@ namespace _13_BankingSystem
                 {
                     CurrentClient = Clients[0];
                     ListName.SelectedItem = ListName.Items[0];
+                    
                 }
             }; //метод который рефрешет родителя после закрытия чилда
 
@@ -145,7 +152,9 @@ namespace _13_BankingSystem
                 Name.Text = $"{legalBody.NameClient}";
                 CurrentClient = legalBody;
             }
-            
+
+            NumberCurrentClient = ListName.SelectedIndex;
+
             StartDeposit.Text = CurrentClient.AmountNow.ToString();
             DateOfStartDeposit.Text = CurrentClient.DateOfStartDeposit.ToShortDateString();
             CountMonth.Text = CurrentClient.CountMonth.ToString();
@@ -160,11 +169,11 @@ namespace _13_BankingSystem
         {
             if (CheckClients())
             {
-                TransferWindow TW = TransferWindow();
+                TransferWindow TW = GetTransferWindow();
             }
         }
 
-        private TransferWindow TransferWindow()
+        private TransferWindow GetTransferWindow()
         {
                 TransferWindow TW = new TransferWindow();
                 TW.Owner = this;
@@ -244,6 +253,8 @@ namespace _13_BankingSystem
             {
                 Clients.Remove(ListName.SelectedItem as Client);
                 MessageBox.Show(_warningDeleteMessage + CurrentClient.NameClient, "Delete", MessageBoxButton.OK);
+                string msg = $"Счёт {CurrentClient.NameClient} закрыт [{DateTime.Now.ToShortTimeString()} {name}]";
+                MsgsHistory.Added(msg);
                 ListName.Items.Refresh();
             }
         }
@@ -262,6 +273,37 @@ namespace _13_BankingSystem
                 isClients = false;
                 return isClients;
             }
+        }
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MsgsHistory.MessageText.Count != 0)
+            {
+                StackPanelHistory.Children.Clear();
+                for (int i = 0; i < MsgsHistory.MessageText.Count; i++)
+                {
+                    TextBlock tb = new TextBlock();
+                    tb.Text = MsgsHistory.MessageText[i];
+                    StackPanelHistory.Children.Add(tb);
+                }
+            }
+        }
+
+        private void UpBalance_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckClients())
+            {
+                UpBalanceWindow UBW = GetUpBalanceWindow();
+            }
+        }
+
+        private UpBalanceWindow GetUpBalanceWindow()
+        {
+            UpBalanceWindow UBW = new UpBalanceWindow();
+            UBW.Owner = this;
+            UBW.Show();
+            Refresh(UBW);
+            return UBW;
         }
     }
 }

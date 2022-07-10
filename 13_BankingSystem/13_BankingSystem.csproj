@@ -59,9 +59,13 @@
       <DependentUpon>AddOrEditClientWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="LegalBody.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="TransferWindow.xaml.cs">
       <DependentUpon>TransferWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpBalanceWindow.xaml.cs">
+      <DependentUpon>UpBalanceWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +85,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TransferWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpBalanceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -126,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\SearchImages.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\UpBalanceImages.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

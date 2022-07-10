@@ -8,182 +8,207 @@
         Title="Bank" 
         Height="450" MinHeight="450" MaxHeight="600"
         Width="800" MinWidth="800" MaxWidth="1200">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
-        </Grid.RowDefinitions>
-        <Grid
-            Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*"/>
-                <ColumnDefinition Width="20*"/>
-            </Grid.ColumnDefinitions>
-            <Grid>
+    <TabControl SelectionChanged="TabControl_SelectionChanged">
+        <TabItem x:Name="MainMenu"
+                 Header="Главное меню">
+            
+            <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="40"/>
                 </Grid.RowDefinitions>
-                <ListView x:Name="ListName"                      
+                <Grid
+            Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="80*"/>
+                        <ColumnDefinition Width="262*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.ColumnSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+                        <Popup x:Name="Popup"
+                               AllowsTransparency="True"
+                               MaxWidth="150"
+                               >
+                            <TextBlock x:Name="Information" Text="{Binding MessageText}"></TextBlock>
+                        </Popup>
+                        <ListView x:Name="ListName"                      
                           Margin="4,1"
                           Grid.Row="0" SelectionChanged="ListName_SelectionChanged">
-                <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Клиент"  
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Клиент"  
                                             DisplayMemberBinding="{Binding NameClient}"
                                             Width="150">
-                            </GridViewColumn >
-                            <GridViewColumn Header="Баланс"
+                                    </GridViewColumn >
+                                    <GridViewColumn Header="Баланс"
                                             DisplayMemberBinding="{Binding AmountNow}"
                                             Width="100">
-                            </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-                </ListView>
-                <Grid Grid.Row="1"
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <Grid Grid.Row="1"
                       Margin="4,1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="25"/>
-                    </Grid.ColumnDefinitions>
-                  <TextBox  x:Name="SearchString"
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox  x:Name="SearchString"
                           Grid.Row="1"
                           Text="Поиск..."
                           Foreground="Gray" 
                           PreviewMouseDown="SearchString_PreviewMouseDown" 
                           />
-                    <Button x:Name="SearchButton" 
+                            <Button x:Name="SearchButton" 
                             Click="SearchButton_Click"
                             Grid.Column="1"
                             Background="White">
-                        <Image Source="Images/SearchImages.png"/>
-                    </Button>
-                    
-                </Grid>
-            </Grid>
-            <Grid Margin="5" 
-                  Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Row="0"
+                                <Image Source="Images/SearchImages.png"/>
+                            </Button>
+
+                        </Grid>
+                    </Grid>
+                    <Grid Margin="5" 
+                  Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0"
                            Grid.ColumnSpan="2"
                            HorizontalAlignment="Center">Данные о клиенте:</TextBlock>
-                <TextBlock x:Name="Name"
+                        <TextBlock x:Name="Name"
                            Grid.Row="1" 
                            FontWeight="Bold"
                            Grid.Column="1"
                            Text="-"
                            />
-                <TextBlock x:Name="DateOfBirth" 
+                        <TextBlock x:Name="DateOfBirth" 
                            Grid.Row="2" 
                            FontWeight="Bold"
                            Grid.Column="1"
                            Text="-"
                            />
-                <TextBlock x:Name="StartDeposit" 
+                        <TextBlock x:Name="StartDeposit" 
                            Grid.Column="1"
                            Grid.Row="3" 
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock x:Name="DateOfStartDeposit"
+                        <TextBlock x:Name="DateOfStartDeposit"
                            Grid.Column="1"
                            Grid.Row="4" 
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock x:Name="CountMonth"
+                        <TextBlock x:Name="CountMonth"
                            Grid.Column="1"
                            Grid.Row="5" 
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock x:Name="AmountNow"
+                        <TextBlock x:Name="AmountNow"
                            Grid.Column="1"
                            Grid.Row="6" 
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock x:Name="BankRate"
+                        <TextBlock x:Name="BankRate"
                            Grid.Column="1"
                            Grid.Row="7"           
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock x:Name="AccrualOfInterest" 
+                        <TextBlock x:Name="AccrualOfInterest" 
                            Grid.Column="1"
                            Grid.Row="8" 
                            FontWeight="Bold"
                            Text="-"
                            />
-                <TextBlock Grid.Row="1" 
+                        <TextBlock Grid.Row="1" 
                            FontWeight="Bold"
                            Text="Клиент:"
                            HorizontalAlignment="Right"
                            />
-                <TextBlock Grid.Row="2" 
+                        <TextBlock Grid.Row="2" 
                            FontWeight="Bold"
                            Text="Дата рождения:"
                            HorizontalAlignment="Right"
                            />
-                <TextBlock Grid.Row="3" 
+                        <TextBlock Grid.Row="3" 
                            FontWeight="Bold"
                            Text="Сумма:"
                            HorizontalAlignment="Right"
                            />
-                <TextBlock Grid.Row="4" 
+                        <TextBlock Grid.Row="4" 
                            FontWeight="Bold"
                            Text="Дата открытия счёта:"
                            HorizontalAlignment="Right"
                            />
-                <TextBlock Grid.Row="5" 
+                        <TextBlock Grid.Row="5" 
                            FontWeight="Bold"
                            HorizontalAlignment="Right"
                            Text="Кол-во месяцев:"
                            />
-                <TextBlock Grid.Row="6" 
+                        <TextBlock Grid.Row="6" 
                            HorizontalAlignment="Right"
                            FontWeight="Bold"
                            Text="Сумма на текущий момент:"
                            />
-                <TextBlock Grid.Row="7" 
+                        <TextBlock Grid.Row="7" 
                            HorizontalAlignment="Right"
                            FontWeight="Bold"
                            Text="Банковская ставка:"
                            />
-                <TextBlock Grid.Row="8" 
+                        <TextBlock Grid.Row="8" 
                            HorizontalAlignment="Right"
                            FontWeight="Bold"
                            Text="Начисление процентов:"
                            />
+                    </Grid>
+                </Grid>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="AddClientButton" Width="35" Margin="2" Click="AddClientButton_Click" >
+                        <Image Source="/Images/AddImages.png" />
+                    </Button>
+                    <Button x:Name="EditClientButton" Width="35" Margin="2" Click="EditClientButton_Click">
+                        <Image Source="/Images/EditImages.png" />
+                    </Button>
+                    <Button x:Name="TransferButton" Width="35" Margin="2" Click="TransferButton_Click">
+                        <Image Source="/Images/TransferImages.png" />
+                    </Button>
+                    <Button x:Name="UpBalance" Width="35" Margin="2" Click="UpBalance_Click" >
+                        <Image Source="/Images/UpBalanceImages.png"/>
+                    </Button>
+                    <Button x:Name="DeleteClient" Width="35" Margin="2" Click="DeleteClient_Click">
+                        <Image Source="/Images/DeleteImage1.png"/>
+                    </Button>
+                </StackPanel>
             </Grid>
-        </Grid>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="AddClientButton" Width="35" Margin="2" Click="AddClientButton_Click" >
-                <Image Source="/Images/AddImages.png" />
-            </Button>
-            <Button x:Name="EditClientButton" Width="35" Margin="2" Click="EditClientButton_Click">
-                <Image Source="/Images/EditImages.png" />
-            </Button>
-            <Button x:Name="TransferButton" Width="35" Margin="2" Click="TransferButton_Click">
-                <Image Source="/Images/TransferImages.png" />
-            </Button>
-            <Button x:Name="DeleteClient" Width="35" Margin="2" Click="DeleteClient_Click">
-                <Image Source="/Images/DeleteImage1.png"/>
-            </Button>
-        </StackPanel>
-    </Grid>
+        </TabItem>
+        <TabItem x:Name="History"
+                 Header="Журнал">
+            <StackPanel x:Name="StackPanelHistory" 
+                        Margin="15" 
+                        Background="LightGray"
+                        >
+
+            </StackPanel>
+        </TabItem>
+    </TabControl>
 </Window>

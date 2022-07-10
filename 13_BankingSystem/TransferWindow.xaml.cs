@@ -54,8 +54,14 @@ namespace _13_BankingSystem
                     MainWindow.Clients[numberSender].AmountNow -= result;
                     MainWindow.Clients[numberRecipient].AmountNow += result;
                     InfoText.Text = "Успешно выполнено";
+                    
                     ListNameSender.Items.Refresh();
                     ListNameRecipient.Items.Refresh();
+
+                    string msg = $"Клиент {MainWindow.Clients[numberSender].NameClient} выполнил перевод клиенту { MainWindow.Clients[numberRecipient].NameClient}" +
+                        $"на сумму: {result}"+ 
+                        $"[{DateTime.Now.ToShortTimeString()} {MainWindow.name}] ";
+                    MainWindow.MsgsHistory.Added(msg);
                 }
                 else
                 {

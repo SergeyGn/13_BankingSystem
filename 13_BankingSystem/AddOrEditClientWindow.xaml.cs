@@ -189,14 +189,27 @@ namespace _13_BankingSystem
                 }
                 Amount.Text = "";
                 DialogString.Text = "Результат сохранён";
+                string name = Environment.UserName;
+                DateTime date = DateTime.Now;
 
                 if (MainWindow.IsEdit == false)
                 {
                     MainWindow.Clients.Add(newClient);
+
+                    string text = $"Создан счет на {newClient.NameClient} на сумму {newClient.AmountNow.ToString()} [{date.ToShortTimeString()} {name}]";
+                    MainWindow.MsgsHistory.Added(text);
+
                     Close();
                 }
                 else if (MainWindow.IsEdit == true)
                 {
+                    string text = $"Счет изменен с {MainWindow.Clients[MainWindow.NumberCurrentClient].NameClient}" +
+                        $" сумма: {MainWindow.Clients[MainWindow.NumberCurrentClient].AmountNow.ToString()} "  +
+                        $"на {newClient.NameClient} сумма: {newClient.AmountNow.ToString()}" +
+                        $"[{date.ToShortTimeString()} {name}]";
+
+
+                    MainWindow.MsgsHistory.Added(text);
                     MainWindow.Clients[MainWindow.NumberCurrentClient] = newClient;
                     Close();
                 }
@@ -208,6 +221,7 @@ namespace _13_BankingSystem
                 DialogString.Text = "Некорректные данные";
             }
         }
+
         private bool CheckVIP()
         {
             if (VIPclient.IsChecked == true)
@@ -215,23 +229,6 @@ namespace _13_BankingSystem
             else
                 return false;
         }
-        //private string CheckText(TextBox textBox) //доделать реализацию 
-        //{
-        //    string badChar = "/?.>,<'}{[]-=+0987654321!@#$%^&*()_"+"";
-        //    string text = textBox.Text;
-        //    for (int i=0;i<text.Length;i++)
-        //    {
-        //        for(int j=0;j<badChar.Length;j++)
-        //        {
-        //            if(i==j)
-        //            {
-        //                textBox.Foreground = Brushes.Red;
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return text;
-        //}
         private void Deposit_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             Deposit.Text = "";
