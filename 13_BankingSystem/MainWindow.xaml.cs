@@ -22,15 +22,15 @@ namespace _13_BankingSystem
         private string _warningDeleteMessage = "Удалён пользователь ";
         private string _warningFindEnd = "Поиск окончен";
         private string _warningNotClient = "Нет пользователей!";
-        static public Client CurrentClient;
-        static public bool IsEdit;
-        static public int NumberCurrentClient;
+        public static  Client CurrentClient;
+        public static  bool IsEdit;
+        public static  int NumberCurrentClient;
         public static string[] arrayMonth = new string[12] { "январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь" };
 
 
         public static Messages MsgsHistory = new Messages();
    
-        static public string name = Environment.UserName;
+         public static string name = Environment.UserName;
         public MainWindow()
         {
             InitializeComponent();
