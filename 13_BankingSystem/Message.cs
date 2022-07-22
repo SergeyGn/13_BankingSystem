@@ -9,11 +9,7 @@ namespace _13_BankingSystem
 {
    public class Messages:INotifyPropertyChanged
     {
-        //public Messages(List<string> MessageText)
-        //{
-        //    messageText = MessageText;
-        //    PropertyChanged?.Invoke(messageText, new PropertyChangedEventArgs(messageText.Count.ToString()));
-        //}
+    
         public event PropertyChangedEventHandler PropertyChanged;
 
         private List<string> messageText;

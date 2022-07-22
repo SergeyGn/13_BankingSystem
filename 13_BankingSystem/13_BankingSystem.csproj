@@ -138,5 +138,11 @@
   <ItemGroup>
     <Resource Include="Images\UpBalanceImages.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ConvertingInformation\ConvertingInformation.csproj">
+      <Project>{ce4f26d8-4557-47f4-af86-8c469e8ab4e3}</Project>
+      <Name>ConvertingInformation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -27,29 +27,25 @@ namespace _13_BankingSystem
             if (startDeposit >= 0)
             {
                 StartDeposit = startDeposit;
-            }
-            else
-            {
-                throw new IndexOutOfRangeException();
-            }
-            IsCapitalization = isCapitalization;
 
-            DateOfStartDeposit = dateOfStartDeposit;
-            DateOfEndDeposit = dateOfEndDeposit;
-            AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
-            AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
-            CountMonth = GetCountMonth(dateOfStartDeposit, dateOfEndDeposit);
-            IsVIP = isVIP;
-            if (isVIP == true)
-            {
-                Percent = GetHigherPercent(percent,1.2);
+                IsCapitalization = isCapitalization;
+
+                DateOfStartDeposit = dateOfStartDeposit;
+                DateOfEndDeposit = dateOfEndDeposit;
+                AmountNow = GetAmonth(GetCountMonth(dateOfStartDeposit, DateTime.Now), startDeposit, percent);
+                AmountEnd = GetAmonth(GetCountMonth(dateOfStartDeposit, dateOfEndDeposit), startDeposit, percent);
+                CountMonth = GetCountMonth(dateOfStartDeposit, dateOfEndDeposit);
+                IsVIP = isVIP;
+                if (isVIP == true)
+                {
+                    Percent = GetHigherPercent(percent, 1.2);
+                }
+                else
+                {
+                    Percent = percent;
+                }
             }
-            else
-            {
-                Percent = percent;
-            }
-            
-            
+
         }
        
         /// <summary>

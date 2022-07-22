@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using ConvertingInformation;
 
 namespace _13_BankingSystem
 {
@@ -61,43 +54,34 @@ namespace _13_BankingSystem
 
         private void CalculateButton_Click(object sender, RoutedEventArgs e)
         {
-            DateTime startDepositDate = GetDate(YearStartDeposit.Text, MonthStartDeposit.Text, CountDayStartDeposit.Text);
-            DateTime endDepositDate = GetDate(YearEndDeposit.Text, MonthEndDeposit.Text, CountDayEndDeposit.Text);
-            if (RadioButtonLegalBody.IsChecked == true)
+            double depositCalculated = Converter.ConvertingStringInDouble(Deposit.Text);
+            if (depositCalculated >= 0)
             {
-                newClient = new LegalBody("",ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
-            }
-            else if (RadioButtonClient.IsChecked == true)
-            {
-                newClient = new Person("",ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
-            }
-            Amount.Text = newClient.AmountEnd.ToString();
-        }
 
-        private static DateTime GetDate(string year, string month, string day)
-        {
-            int countMonth=1;
-            for(int i=0;i< MainWindow.arrayMonth.Length;i++)
-            {
-                if(MainWindow.arrayMonth[i]==month)
+                DateTime startDepositDate = Converter.GetDate(MainWindow.arrayMonth,
+                    YearStartDeposit.Text,
+                    MonthStartDeposit.Text,
+                    CountDayStartDeposit.Text);
+
+                DateTime endDepositDate = Converter.GetDate(MainWindow.arrayMonth,
+                    YearEndDeposit.Text,
+                    MonthEndDeposit.Text,
+                    CountDayEndDeposit.Text);
+
+                if (RadioButtonLegalBody.IsChecked == true)
                 {
-                    countMonth = i + 1;
+                    newClient = new LegalBody("", depositCalculated, startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
                 }
+                else if (RadioButtonClient.IsChecked == true)
+                {
+                    newClient = new Person("", depositCalculated, startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
+                }
+                Amount.Text = newClient.AmountEnd.ToString();
             }
-            DateTime date = new DateTime(int.Parse(year), countMonth, int.Parse(day));
-            return date;
-        }
-
-        private double ConvertingStringInDouble(string text)
-        {
-            if(double.TryParse(text,out double result))
+            else 
             {
-                return result;
-            }
-            else
-            {
-                Deposit.Text = "Некорректное значение";
-                return -1;
+                Amount.Text = "";
+                DialogString.Text = "Некорректные данные";
             }
         }
 
@@ -164,18 +148,18 @@ namespace _13_BankingSystem
             
             try
             {
-                DateTime startDepositDate = GetDate(YearStartDeposit.Text, MonthStartDeposit.Text, CountDayStartDeposit.Text);
-                DateTime endDepositDate = GetDate(YearEndDeposit.Text, MonthEndDeposit.Text, CountDayEndDeposit.Text);
+                DateTime startDepositDate = Converter.GetDate(MainWindow.arrayMonth,YearStartDeposit.Text, MonthStartDeposit.Text, CountDayStartDeposit.Text);
+                DateTime endDepositDate = Converter.GetDate(MainWindow.arrayMonth,YearEndDeposit.Text, MonthEndDeposit.Text, CountDayEndDeposit.Text);
 
                 if (RadioButtonClient.IsChecked == true)
                 {
-                    DateTime birthDay = GetDate(YearBirthday.Text, MonthBirthday.Text, CountDayBirth.Text);
+                    DateTime birthDay = Converter.GetDate(MainWindow.arrayMonth, YearBirthday.Text, MonthBirthday.Text, CountDayBirth.Text);
                     newClient = new Person(
                             LastName.Text,
                             FirstName.Text,
                             Patronymic.Text,
                             birthDay,
-                            ConvertingStringInDouble(Deposit.Text),
+                            Converter.ConvertingStringInDouble(Deposit.Text),
                             startDepositDate,
                             endDepositDate,
                             GetBankRate(),
@@ -185,7 +169,7 @@ namespace _13_BankingSystem
                 }
                 else if(RadioButtonLegalBody.IsChecked==true)
                 {
-                    newClient = new LegalBody(NameCompany.Text, ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
+                    newClient = new LegalBody(NameCompany.Text, Converter.ConvertingStringInDouble(Deposit.Text), startDepositDate, endDepositDate, GetBankRate(), isCapitalization, CheckVIP());
                 }
                 Amount.Text = "";
                 DialogString.Text = "Результат сохранён";
@@ -216,7 +200,6 @@ namespace _13_BankingSystem
             }
             catch(IndexOutOfRangeException)
             {
-
                 Amount.Text = "";
                 DialogString.Text = "Некорректные данные";
             }
